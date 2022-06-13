@@ -7,6 +7,7 @@ import 'package:micros_user_app/presentation/views/views.dart';
 import 'package:micros_user_app/presentation/widgets/btn_show_range.dart';
 import 'package:micros_user_app/presentation/widgets/widgets.dart';
 
+
 class MapScreen extends StatefulWidget {
   const MapScreen({Key? key}) : super(key: key);
 
@@ -56,7 +57,7 @@ class _MapScreenState extends State<MapScreen> {
                       polylines: mapState.polylines,
                       circles: circles,
                     ),
-                    const CustomSearchBar(),
+                    const CustomSearchBar('nise bro'),
                     const LegendListView(),
                   ],
                 ),
@@ -77,4 +78,6 @@ class _MapScreenState extends State<MapScreen> {
       ),
     );
   }
+
+  //
 }
