@@ -57,7 +57,7 @@ class _MapScreenState extends State<MapScreen> {
                       polylines: mapState.polylines,
                       circles: circles,
                     ),
-                    const CustomSearchBar('nise bro'),
+                    const CustomSearchBar(),
                     const LegendListView(),
                   ],
                 ),

@@ -10,8 +10,7 @@ import 'package:http/http.dart' as http;
 import 'dart:convert' as convert;
 
 class CustomSearchBar extends StatelessWidget {
-  final String texto;
-  const CustomSearchBar(this.texto, {Key? key}) : super(key: key);
+  const CustomSearchBar({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

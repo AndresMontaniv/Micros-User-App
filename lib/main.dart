@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:micros_user_app/data/blocs/blocs.dart';
 import 'package:micros_user_app/business/router/app_routes.dart';
 import 'package:micros_user_app/data/services/services.dart';
+import 'package:provider/provider.dart';
 
 void main() {
   runApp(
@@ -17,7 +18,12 @@ void main() {
                 MapBloc(locationBloc: BlocProvider.of<LocationBloc>(context))),
         BlocProvider(create: (context) => SearchBloc()),
       ],
-      child: const MyApp(),
+      child: MultiProvider(
+        providers: [
+          ChangeNotifierProvider(create: ( _ ) => BusesService())
+        ],
+        child: const MyApp(),
+      ),
     ),
   );
 }
