@@ -1,18 +1,24 @@
 import 'dart:convert';
 
+import 'package:google_maps_flutter/google_maps_flutter.dart';
+
 class Bus {
   int id;
   String color;
   String name;
   String? photo;
   int status;
+  Polyline rutaIda;
+  Polyline rutaVuelta;
 //------------------------------------------------------------------------------
   Bus({
     required this.id,
     this.color = '',
     this.name = '',
     this.photo,
-    this.status = 0,
+    this.status = 0,    
+    this.rutaIda = const Polyline(polylineId: PolylineId('') ),
+    this.rutaVuelta = const Polyline(polylineId: PolylineId('') ),
   });
 //------------------------------------------------------------------------------
   factory Bus.fromJson(String str) => Bus.fromMap(json.decode(str));
@@ -30,7 +36,7 @@ class Bus {
 
   @override
   String toString() {
-    return '{id: $id, color: $color, name: $name, photo: $photo, status: $status }';
+    return '{id: $id, color: $color, name: $name, photo: $photo, status: $status, rutaIda: $rutaIda, rutaVuelta: $rutaVuelta}';
     // return super.toString();
   }
 

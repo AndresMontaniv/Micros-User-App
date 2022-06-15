@@ -35,6 +35,9 @@ class _CustomSearchBarBody extends StatelessWidget {
     final mapBloc = BlocProvider.of<MapBloc>(context);
     searchBloc.add(OnActivateLegendEvent());
     final polylines = result.resultPolylines;
+    // print(polylines?.elementAt(0).points);
+    // print('---------------');
+    // print(polylines?.elementAt(1).points);
     if (polylines!.isNotEmpty) {
       mapBloc.add(UpdatePolylinesEvent(polylines));
     }
@@ -51,11 +54,10 @@ class _CustomSearchBarBody extends StatelessWidget {
           onTap: () async {
             final result = await showSearch(
                 context: context, delegate: SearchRouteDelegate());
-            // print(texto)
-            // if (result == null) return;
-            // if (result.cancel) return;
-            // if (result.resultPolylines == null) return;
-            // onSearchResults(context, result);
+            if (result == null) return;
+            if (result.cancel) return;
+            if (result.resultPolylines == null) return;
+            onSearchResults(context, result);
           },
           child: Container(
             padding: const EdgeInsets.symmetric(
@@ -83,21 +85,5 @@ class _CustomSearchBarBody extends StatelessWidget {
         ),
       ),
     );
-  }
-
-//conexion ala al servicio api -> return lista de productos
-  void getBuses() async {
-    var response = await http
-        .get(Uri.parse('https://supportficct.ga/sig_backend/api/bus/index'));
-
-    print("RESPUESTA GET: :  Views.Producto._getProducto => " + response.body);
-    // var jsonResponse = convert.jsonDecode(response.body)['data'];
-    // for (var item in jsonResponse) {
-    //   Bus product = Bus.fromMap(item);
-    //   // print(product);
-    //   buses.add(product);
-    // }
-    // // print('salio del for');
-    // return buses;
   }
 }

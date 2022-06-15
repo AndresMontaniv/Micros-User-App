@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:micros_user_app/data/services/services.dart';
+import 'package:micros_user_app/presentation/screens/screens.dart';
+import 'package:provider/provider.dart';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
@@ -6,7 +9,6 @@ import 'package:micros_user_app/data/blocs/blocs.dart';
 import 'package:micros_user_app/presentation/views/views.dart';
 import 'package:micros_user_app/presentation/widgets/btn_show_range.dart';
 import 'package:micros_user_app/presentation/widgets/widgets.dart';
-
 
 class MapScreen extends StatefulWidget {
   const MapScreen({Key? key}) : super(key: key);
@@ -17,7 +19,7 @@ class MapScreen extends StatefulWidget {
 
 class _MapScreenState extends State<MapScreen> {
   late LocationBloc locationBloc;
-
+  late BusesService busesService;
   @override
   void initState() {
     super.initState();
@@ -34,6 +36,13 @@ class _MapScreenState extends State<MapScreen> {
 
   @override
   Widget build(BuildContext context) {
+    busesService = Provider.of<BusesService>(context);
+    if (busesService.isLoading) return const Loading2Screen();
+    // print('rutdaIda----------------------------------');
+    // print(busesService.buses);
+    print('rutavuelta----------------------------------');
+    print(busesService.buses[0].rutaVuelta.width);
+
     return Scaffold(
       body: BlocBuilder<LocationBloc, LocationState>(
         builder: (context, locationState) {

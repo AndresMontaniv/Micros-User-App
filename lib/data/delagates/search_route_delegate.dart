@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:provider/provider.dart';
 
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -20,6 +21,8 @@ class SearchRouteDelegate extends SearchDelegate<SearResult> {
       IconButton(
         icon: const Icon(Icons.clear),
         onPressed: () {
+          print('buildActions');
+
           query = '';
         },
       ),
@@ -31,6 +34,8 @@ class SearchRouteDelegate extends SearchDelegate<SearResult> {
     return IconButton(
       icon: const Icon(Icons.arrow_back_ios),
       onPressed: () {
+        print('buildLeading');
+
         final result = SearResult(cancel: true);
         close(context, result);
       },
@@ -56,6 +61,8 @@ class SearchRouteDelegate extends SearchDelegate<SearResult> {
                 color: Colors.black,
               ),
               onTap: () {
+                print('buildResults');
+
                 final res = SearResult(
                   cancel: false,
                   resultPolylines: result.values.elementAt(i),
@@ -78,6 +85,10 @@ class SearchRouteDelegate extends SearchDelegate<SearResult> {
   Widget buildSuggestions(BuildContext context) {
     final busesService = Provider.of<BusesService>(context);
     if (busesService.isLoading) return const Loading2Screen();
+    //  print('rutdaIda----------------------------------');
+    // print(busesService.buses[0].rutaIda.points);
+    // print('rutavuelta----------------------------------');
+    // print(busesService.buses[0].rutaVuelta.points);
     final busRoutes = BusRoutes.routes;
     return ListView.separated(
       itemBuilder: (context, i) => ListTile(
@@ -90,9 +101,19 @@ class SearchRouteDelegate extends SearchDelegate<SearResult> {
           color: Colors.black,
         ),
         onTap: () {
+          // Set<Polyline> p = {
+          //     busesService.buses[i].rutaVuelta,
+          //     busesService.buses[i].rutaIda,
+          //   };
+          // busesService.buses[i].rutaVuelta,
           final res = SearResult(
             cancel: false,
-            resultPolylines: busRoutes.values.elementAt(i),
+            // resultPolylines: busRoutes.values.elementAt(i),
+            // resultPolylines: {
+            //   busesService.buses[i].rutaIda,
+            //   busesService.buses[i].rutaVuelta
+            // },
+            resultPolylines: p,
           );
           close(context, res);
         },
