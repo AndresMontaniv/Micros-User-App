@@ -110,10 +110,6 @@ class SearchRouteDelegate extends SearchDelegate<SearResult> {
           // print("################");
           // print(p.length);
 
-
-          // busesService.buses[i].rutaIda,
-          //busesService.buses[i].rutaVuelta
-
           final res = SearResult(
             cancel: false,
             // resultPolylines: busRoutes.values.elementAt(i),
