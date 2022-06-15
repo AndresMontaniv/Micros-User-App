@@ -28,6 +28,7 @@ class BusesService extends ChangeNotifier {
     for (var i = 0; i < buses.length; i++) {
       loadRutaIda(i);
       loadRutaVuelta(i);
+      getSpecificRoute(i);
     }
     // for (var i = 0; i < buses.length; i++) {
     //   loadRutaVuelta(i);
@@ -60,6 +61,38 @@ class BusesService extends ChangeNotifier {
     }
   }
 
+
+  void getSpecificRoute(int i) async {
+    final r = await http.get(Uri.parse(
+        _baseUrl + 'coordinate/show/' + buses[i].id.toString() + '/1'));
+    final response = json.decode(r.body);
+    final r2 = await http.get(Uri.parse(
+        _baseUrl + 'coordinate/show/' + buses[i].id.toString() + '/0'));
+    final response2 = json.decode(r2.body);
+    // print('vuelta------------------------------------');
+    // print(response);
+    if (buses.isNotEmpty) {
+      List<LatLng> listaAll = [];
+      for (var item in response) {
+        Coordinate obj = Coordinate.fromJson(item);
+        listaAll.add(obj.toLatLng());
+      }
+      for (var item in response2) {
+        Coordinate obj = Coordinate.fromJson(item);
+        listaAll.add(obj.toLatLng());
+      }
+      buses[i].bothWays = Polyline(
+        polylineId: PolylineId(buses[i].name),
+        color: Colors.blue,
+        width: 4,
+        startCap: Cap.roundCap,
+        endCap: Cap.roundCap,
+        points: listaAll,
+      );
+      //buses[i].bothWays.copyWith(pointsParam: buses[i].bothWays.points);
+    }
+  }
+
   void loadRutaVuelta(int i) async {
     final r = await http.get(Uri.parse(
         _baseUrl + 'coordinate/show/' + buses[i].id.toString() + '/1'));
@@ -86,6 +119,7 @@ class BusesService extends ChangeNotifier {
   Future<List<Bus>> loadRuta(int i) async {
     loadRutaIda(i);
     loadRutaVuelta(i);
+    getSpecificRoute(i);
     return buses;
   }
 }

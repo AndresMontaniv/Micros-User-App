@@ -63,7 +63,7 @@ class _MapScreenState extends State<MapScreen> {
                   children: [
                     MapView(
                       initialLocation: locationState.lastKnownLocation!,
-                      polylines: mapState.polylines,
+                      polylines: Set<Polyline>.of(mapState.polylines),
                       circles: circles,
                     ),
                     const CustomSearchBar(),

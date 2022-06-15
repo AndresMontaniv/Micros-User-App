@@ -101,11 +101,19 @@ class SearchRouteDelegate extends SearchDelegate<SearResult> {
           color: Colors.black,
         ),
         onTap: () {
-          // Set<Polyline> p = {
-          //     busesService.buses[i].rutaVuelta,
-          //     busesService.buses[i].rutaIda,
-          //   };
-          // busesService.buses[i].rutaVuelta,
+          Set<Polyline> p = {busesService.buses[i].bothWays};
+
+          // p.add(busesService.buses[i].rutaVuelta);
+           print("@@@@@@@@@@@@@@@@");
+           print(p.length);
+          // p.add(busesService.buses[i].rutaIda);
+          // print("################");
+          // print(p.length);
+
+
+          // busesService.buses[i].rutaIda,
+          //busesService.buses[i].rutaVuelta
+
           final res = SearResult(
             cancel: false,
             // resultPolylines: busRoutes.values.elementAt(i),

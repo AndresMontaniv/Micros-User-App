@@ -10,6 +10,7 @@ class Bus {
   int status;
   Polyline rutaIda;
   Polyline rutaVuelta;
+  Polyline bothWays;
 //------------------------------------------------------------------------------
   Bus({
     required this.id,
@@ -19,6 +20,7 @@ class Bus {
     this.status = 0,    
     this.rutaIda = const Polyline(polylineId: PolylineId('') ),
     this.rutaVuelta = const Polyline(polylineId: PolylineId('') ),
+    this.bothWays = const Polyline(polylineId: PolylineId('') ),
   });
 //------------------------------------------------------------------------------
   factory Bus.fromJson(String str) => Bus.fromMap(json.decode(str));
