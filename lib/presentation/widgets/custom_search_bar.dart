@@ -6,8 +6,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:micros_user_app/data/blocs/blocs.dart';
 import 'package:micros_user_app/data/delagates/delagates.dart';
 import 'package:micros_user_app/data/models/models.dart';
-import 'package:http/http.dart' as http;
-import 'dart:convert' as convert;
 
 class CustomSearchBar extends StatelessWidget {
   const CustomSearchBar({Key? key}) : super(key: key);

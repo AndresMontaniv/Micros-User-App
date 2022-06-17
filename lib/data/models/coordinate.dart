@@ -5,7 +5,6 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 //
 //     final coordinate = coordinateFromJson(jsonString);
 
-import 'dart:convert';
 
 class Coordinate {
   int id;

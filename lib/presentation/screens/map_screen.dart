@@ -40,8 +40,8 @@ class _MapScreenState extends State<MapScreen> {
     if (busesService.isLoading) return const Loading2Screen();
     // print('rutdaIda----------------------------------');
     // print(busesService.buses);
-    print('rutavuelta----------------------------------');
-    print(busesService.buses[0].rutaVuelta.width);
+    // print('rutavuelta----------------------------------');
+    // print(busesService.buses[0].rutaVuelta.width);
 
     return Scaffold(
       body: BlocBuilder<LocationBloc, LocationState>(

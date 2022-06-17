@@ -17,12 +17,11 @@ class SearchRouteDelegate extends SearchDelegate<SearResult> {
 
   @override
   List<Widget>? buildActions(BuildContext context) {
+    print('buildActions');
     return [
       IconButton(
         icon: const Icon(Icons.clear),
         onPressed: () {
-          print('buildActions');
-
           query = '';
         },
       ),
@@ -31,11 +30,10 @@ class SearchRouteDelegate extends SearchDelegate<SearResult> {
 
   @override
   Widget? buildLeading(BuildContext context) {
+    print('buildLeading');
     return IconButton(
       icon: const Icon(Icons.arrow_back_ios),
       onPressed: () {
-        print('buildLeading');
-
         final result = SearResult(cancel: true);
         close(context, result);
       },
@@ -44,8 +42,10 @@ class SearchRouteDelegate extends SearchDelegate<SearResult> {
 
   @override
   Widget buildResults(BuildContext context) {
+    print('buildResults');
     final busesService = Provider.of<BusesService>(context);
     if (busesService.isLoading) return const Loading2Screen();
+    
     final result = BusRoutes.searchWhereLike(query);
     return result.isNotEmpty
         ? ListView.separated(
@@ -61,8 +61,6 @@ class SearchRouteDelegate extends SearchDelegate<SearResult> {
                 color: Colors.black,
               ),
               onTap: () {
-                print('buildResults');
-
                 final res = SearResult(
                   cancel: false,
                   resultPolylines: result.values.elementAt(i),
@@ -83,8 +81,9 @@ class SearchRouteDelegate extends SearchDelegate<SearResult> {
 
   @override
   Widget buildSuggestions(BuildContext context) {
+    print('buildSuggestions');
     final busesService = Provider.of<BusesService>(context);
-    if (busesService.isLoading) return const Loading2Screen();
+    // if (busesService.isLoading) return const Loading2Screen();
     //  print('rutdaIda----------------------------------');
     // print(busesService.buses[0].rutaIda.points);
     // print('rutavuelta----------------------------------');
@@ -101,14 +100,17 @@ class SearchRouteDelegate extends SearchDelegate<SearResult> {
           color: Colors.black,
         ),
         onTap: () {
-          // Set<Polyline> p = {
-          //     busesService.buses[i].rutaVuelta,
-          //     busesService.buses[i].rutaIda,
-          //   };
+          // busesService.loadRutaIda(i);
+          // if (busesService.isLoading) return const Loading2Screen();
+          Set<Polyline> p = {
+            busesService.buses[i].rutaIda,
+            busesService.buses[i].rutaVuelta,
+            // busRoutes.values.elementAt(i).elementAt(1) //si intercalas aparece la linea seleccionada
+          };
           // busesService.buses[i].rutaVuelta,
           final res = SearResult(
             cancel: false,
-            // resultPolylines: busRoutes.values.elementAt(i),
+            // resultPolylines: {busRoutes.values.elementAt(i).elementAt(0), busRoutes.values.elementAt(i).elementAt(1)},
             // resultPolylines: {
             //   busesService.buses[i].rutaIda,
             //   busesService.buses[i].rutaVuelta
@@ -119,7 +121,7 @@ class SearchRouteDelegate extends SearchDelegate<SearResult> {
         },
       ),
       separatorBuilder: (_, __) => const Divider(),
-      itemCount: busRoutes.length,
+      itemCount: busesService.buses.length,
     );
   }
 }
